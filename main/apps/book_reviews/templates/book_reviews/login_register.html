@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Welcome</title>
+	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+	<style type="text/css">
+		.container-fluid {
+			margin: 2%;
+			padding-right: 10%
+		}
+		input[type="text"] {
+			width: 100%;
+		}
+		input[type="email"] {
+			width: 100%;
+		}
+		input[type="password"] {
+			width: 100%;
+		}
+
+		.row {
+			margin: 2%;
+		}
+
+		fieldset {
+			outline: 2px solid black;
+		}
+
+		h5 {
+			margin-top: -15px;
+			margin-left: 20px;
+			width: 100px;
+			background: white;
+		}
+
+		.error {
+			color: red;
+		}
+
+	</style>
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="row">
+			{{errors}}
+			<div class="col-sm-12">
+				<h1>Welcome!</h1>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-6 col-xs-12">
+				<fieldset>
+					<h5>Register</h5>
+					<ul class="error">
+						{% for k, v in register_errors.iteritems %}
+							<li>{{v}}</li>
+						{% endfor %}
+					</ul>
+					<form action="/register" method='post'>{%csrf_token%}
+						<div class="row">
+							<div class="col-sm-3">Name:</div>
+							<div class="col-sm-9">
+								<input type="text" name="name">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-3">Alias:</div>
+							<div class="col-sm-9">
+								<input type="text" name="alias">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-3">Email:</div>
+							<div class="col-sm-9">
+								<input type="email" name="email">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-3">Password:</div>
+							<div class="col-sm-9">
+								<input type="password" name="password">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-12">
+								*Password should be at least 8 characters
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-3">Confirm PW:</div>
+							<div class="col-sm-9">
+								<input type="password" name="confirm">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-12">
+								<input type="submit" name="submit" value="Register">
+							</div>
+						</div>
+					</form>
+				</fieldset>
+			</div>
+			<div class="col-sm-6 col-xs-12">
+				<fieldset>
+					<h5>Login</h5>
+					<ul class="error">
+						{% for k, v in login_errors.iteritems %}
+							<li>{{v}}</li>
+						{% endfor %}
+					</ul>
+					<form action="login" method='post'>{% csrf_token %}
+						<div class="row">
+							<div class="col-sm-3">Email:</div>
+							<div class="col-sm-9">
+								<input type="email" name="email">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-3">Password:</div>
+							<div class="col-sm-9">
+								<input type="password" name="password">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-12">
+								<input type="submit" name="submit" value="Login">
+							</div>
+						</div>
+					</form>
+				</fieldset>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

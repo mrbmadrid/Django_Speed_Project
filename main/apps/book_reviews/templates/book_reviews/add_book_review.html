@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Add Book and Review</title>
+	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+	<style type="text/css">
+		.container-fluid {
+			margin: 2%;
+			padding-right: 10%
+		}
+		input[type="text"] {
+			width: 100%;
+		}
+		input[type="email"] {
+			width: 100%;
+		}
+		input[type="password"] {
+			width: 100%;
+		}
+
+		.row {
+			margin: 2%;
+		}
+
+		fieldset {
+			outline: 2px solid black;
+		}
+
+		h5 {
+			margin-top: -15px;
+			margin-left: 20px;
+			width: 100px;
+			background: white;
+		}
+
+		textarea {
+			width: 100%;
+			height: 100px;
+		}
+
+		.banner {
+			text-align: right;
+		}
+
+
+	</style>
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="row banner">
+			<div class="col-sm-11">
+				<a href="/books">Home</a> | <a href="/logout">Logout</a>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
+				<h3>Add a New Book Title and a Review</h3>
+			</div>
+		</div>
+		<form action='/books/add' method='post'>{% csrf_token %}
+			<div class="row">
+				<div class="col-sm-3">
+					Book Title:
+				</div>
+				<div class="col-sm-7">
+					<input type="text" name="title">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-10">
+					<div class="row">
+						<div class="col-sm-3">Choose from the list:</div>
+						<div class="col-sm-9">
+							<select name="existing_author">
+							{% for author in authors%}
+								<option value="{{author.name}}">{{author.name}}</option>	
+							{% endfor %}
+							</select>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-3">Or ad a new author</div>
+						<div class="col-sm-9">
+							<input type="text" name="new_author">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-3">
+					Review:
+				</div>
+				<div class="col-sm-7">
+					<textarea name="review">
+						
+					</textarea>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-2">
+					Rating:
+				</div>
+				<div class="col-sm-2">
+					<select name="rating">
+						<option value="1">1</option>
+						<option value="1">2</option>
+						<option value="1">3</option>
+						<option value="1">4</option>
+						<option value="1">5</option>
+					</select> Stars
+				</div>
+			</div>
+			<div class="row">
+				<div class='col-sm-9'></div>
+				<div class="col-sm-3"><input type="submit" name="submit"></div>
+			</div>
+		</form>
+	</div>
+</body>
+</html>
+
+
+
+

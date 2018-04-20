@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Add Book and Review</title>
+	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+	<style type="text/css">
+		.container-fluid {
+			margin: 2%;
+			padding-right: 10%
+		}
+		input[type="text"] {
+			width: 100%;
+		}
+		input[type="email"] {
+			width: 100%;
+		}
+		input[type="password"] {
+			width: 100%;
+		}
+
+		.row {
+			margin: 2%;
+		}
+
+		fieldset {
+			outline: 2px solid black;
+		}
+
+		h5 {
+			margin-top: -15px;
+			margin-left: 20px;
+			width: 100px;
+			background: white;
+		}
+
+		textarea {
+			width: 100%;
+			height: 100px;
+		}
+
+		.banner {
+			text-align: right;
+		}
+
+
+	</style>
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="row banner">
+			<div class="col-sm-11">
+				<a href="/books">Home</a> | <a href="/logout">Logout</a>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
+				<h3>{{book.title}}</h3>
+				<h4>Author: {{book.author.name}}</h4>
+			</div>
+		</div>
+		<div class='row'>
+			<div class="col-sm-6 col-xs-12">
+				<h3>Reviews:</h3>
+				{%for review in reviews%}
+				<div class="contaienr-fluid">
+					<hr>
+					<div class="row">
+						<div class="col-sm-1"></div>
+						<div class="col-sm-11">
+							Rating: {{rating.value}}<br>
+							<a href="/user/{{review.user_id}}">{{review.user.name}}</a> says: {{review.content}}<br>
+							Posted on {{review.created_at}}
+							{% if review.user_id == request.session.id%}
+								<a href="/delete/{{review.id}}">Delete</a>
+							{%endif%}
+						</div>
+					</div>
+				</div>
+				{%endfor%}
+			</div>
+			<div class="col-sm-6 col-xs-12">
+				<h3>Add a Review:</h3>
+				<form action="/addreview" method='post'>{% csrf_token %}
+					<input type="hidden" name="book_id" value="{{book.id}}">
+					<div class="row">
+						<div class="col-sm-3">
+							Review:
+						</div>
+						<div class="col-sm-7">
+							<textarea name="review">
+								
+							</textarea>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-2">
+							Rating:
+						</div>
+						<div class="col-sm-2">
+							<select name="rating">
+								<option value="1">1</option>
+								<option value="1">2</option>
+								<option value="1">3</option>
+								<option value="1">4</option>
+								<option value="1">5</option>
+							</select> Stars
+						</div>
+					</div>
+					<div class="row">
+						<div class='col-sm-9'></div>
+						<div class="col-sm-3"><input type="submit" name="submit"></div>
+					</div>
+				</form>
+			</div>
+		</div>
+		
+	</div>
+</body>
+</html>
+
+
+
+

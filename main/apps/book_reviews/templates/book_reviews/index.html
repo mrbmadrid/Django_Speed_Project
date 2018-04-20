@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Add Book and Review</title>
+	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+	<style type="text/css">
+		.container-fluid {
+			margin: 2%;
+			padding-right: 10%
+		}
+		input[type="text"] {
+			width: 100%;
+		}
+		input[type="email"] {
+			width: 100%;
+		}
+		input[type="password"] {
+			width: 100%;
+		}
+
+		.row {
+			margin: 2%;
+		}
+
+		fieldset {
+			outline: 2px solid black;
+		}
+
+		h5 {
+			margin-top: -15px;
+			margin-left: 20px;
+			width: 100px;
+			background: white;
+		}
+
+		textarea {
+			width: 100%;
+			height: 100px;
+		}
+
+		.banner {
+			text-align: right;
+		}
+
+		.book_list {
+			border: 2px solid black;
+			padding: 5px;
+			width: 80%;
+			height: 400px;
+			overflow: scroll;
+		}
+
+	</style>
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="row banner">
+			<div class="col-sm-6">
+				<h1>Welcome, {{name}}!</h1>
+			</div>
+			<div class="col-sm-5">
+				<a href="/books/add">Add Book and Review</a> | <a href="/logout">Logout</a>
+			</div>
+		</div>
+		<div class='row'>
+			<div class="col-sm-6 col-xs-12">
+				<h3>Recent Book Reviews:</h3>
+				{%for review in reviews%}
+				<div class="contaienr-fluid">
+					<div class="row">
+						<div class="col-sm-12">
+							<a href="/book/{{review.book_id}}"><h4>{{review.book_title}}</h4></a>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-1"></div>
+						<div class="col-sm-11">
+							Rating: {{review.rating}}<br>
+							<a href="/user/{{review.user_id}}">{{review.user}}</a> says: {{review.content}}<br>
+							Posted on {{review.date}}<br>
+						</div>
+					</div>
+				</div>
+				{%endfor%}
+			</div>
+			<div class="col-sm-6 col-xs-12">
+				<h3>Other Books with Reviews:</h3>
+				<div class="book_list">
+					{% for book in all_books %}
+						<a href="/book/{{book.id}}">{{book.title}}</a><br>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+
+
+
+

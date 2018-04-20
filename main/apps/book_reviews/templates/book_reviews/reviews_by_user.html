@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Add Book and Review</title>
+	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+	<style type="text/css">
+		.container-fluid {
+			margin: 2%;
+			padding-right: 10%
+		}
+		input[type="text"] {
+			width: 100%;
+		}
+		input[type="email"] {
+			width: 100%;
+		}
+		input[type="password"] {
+			width: 100%;
+		}
+
+		.row {
+			margin: 2%;
+		}
+
+		fieldset {
+			outline: 2px solid black;
+		}
+
+		h5 {
+			margin-top: -15px;
+			margin-left: 20px;
+			width: 100px;
+			background: white;
+		}
+
+		textarea {
+			width: 100%;
+			height: 100px;
+		}
+
+		.banner {
+			text-align: right;
+		}
+
+		.book_list {
+			border: 2px solid black;
+			padding: 5px;
+			width: 80%;
+			height: 400px;
+			overflow: scroll;
+		}
+
+	</style>
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="row banner">
+			<div class="col-sm-6"><h1>User Profile</h1></div>
+			<div class="col-sm-5">
+				<a href="/books">Home</a> | <a href="/books/add">Add Book and Review</a> | <a href="/logout">Logout</a>
+			</div>
+		</div>
+		<div class='row'>
+			<div class="col-sm-6 col-xs-12">
+				<div class="col-sm-12">
+					<h3>User Alias: {{user.alias}}</h3>
+					<h3>Name: {{user.name}}</h3>
+					<p>Email: {{user.email}}</p>
+					<p>Total Reviews: {{num_reviews}}</p>
+				</div>
+				<h3>Posted reviews on the following books:</h3>
+				<div class="contaienr-fluid">
+				{%for review in reviews%}
+					<div class="row">
+						<div class="col-sm-12">
+							<a href="/book/{{review.book_id}}"><h4>{{review.book.title}}</h4></a>
+						</div>
+					</div>
+				{%endfor%}
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+
+
+
+
